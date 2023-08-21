@@ -36,7 +36,6 @@
             { name: "Word_Count", path: "content.readability.words" },
             { name: "Sentence_Count", path: "content.readability.sentences" },
             { name: "Readability_Score", path: "content.readability.score" },
-            { name: "Crawl_Depth", document: "uu", path: "depth" },
     
             { name: "Inlinks", document: false, path: "inlinks", function: "length" },
             { name: "Unique_Inlinks", document: false, path: "inlinks", function: "count_distinct" },
