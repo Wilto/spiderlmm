@@ -27,12 +27,11 @@ attention to the `spider.seed` property (a list of URLs to use as starting point
 the `urls.crawl` property (one or more [glob](https://lironzluf.github.io/minimatch-playground/) or regex patterns to use when matching urls
 to crawl).
 
-If you want to play it file
-
-Once that's done, just type:
+Once that's done, just type: `spidergram go`, and you should see something like:
 
 ```
-spidergram go
+Crawling URLs
+ ███░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░ 7% | ETA: 80s | 9/115
 ```
 
 That's it. The included configuration file already includes a starting-point URL,
