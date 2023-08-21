@@ -3,7 +3,7 @@ extends:
   - ./reports/default.json5
   - ./reports/screaming_frog.json5
 
-offloadBodyHtml: 'db'
+offloadBodyHtml: 'db'   # Internal storage flag, pls ignore thx
 
 spider:
   seed:
