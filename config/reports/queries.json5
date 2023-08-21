@@ -23,7 +23,7 @@
         query: {
           collection: "responds_with",
           document: "rw",
-          filters: [{ path: "_to", join: "resource._id" }],
+          filters: [{ path: "_to", join: "rs._id" }],
           subqueries: [{
             collection: "links_to",
             document: "lt",
@@ -43,7 +43,7 @@
         query: {
           collection: "links_to",
           document: "lt",
-          filters: [{ path: "_from", join: "resource._id" }],
+          filters: [{ path: "_from", join: "rs._id" }],
           subqueries: [{
             collection: "unique_urls",
             document: "target",
