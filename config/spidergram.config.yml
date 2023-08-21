@@ -7,12 +7,12 @@ offloadBodyHtml: 'db'   # Internal storage flag, pls ignore thx
 
 spider:
   seed:
-   - https://www.example.com
+   - https://iu.edu
   saveCookies: true
   savePerformance: true
-  saveXhrList: true
+  saveXhrList: true 
   urls:
-    crawl: "http*://{*.}example.com/{*,*/**}"
+    crawl: "http*://{*.,}iu.edu/{*,*/**}"
 
 analysis:
   # SF actually EXCLUDES portions of the page by default rather than
