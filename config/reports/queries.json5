@@ -1,0 +1,58 @@
+{
+  queries: {
+    crawled: {
+      // This is a handy utility query that just returns all of the resources
+      // that returned a 200 status. Other queries and reports should add additional
+      // filters and a RETURN block to specify what properties are sent back.
+      
+      description: "Successfully crawled pages",
+      document: "rs",
+      collection: "resources",
+      filters: [{ path: "code", eq: 200}],
+    },
+    crawled_with_links: {
+      // This is the same base query as 'crawled', with subqueries to pull in
+      // both inlinks and outlinks for counting and aggregation.
+      
+      description: "Successfully crawled pages with in/outlinks",
+      document: "rs",
+      collection: "resources",
+      filters: [{ path: "code", eq: 200}],
+      subqueries: [{
+        name: "inlinks",
+        query: {
+          collection: "responds_with",
+          document: "rw",
+          filters: [{ path: "_to", join: "resource._id" }],
+          subqueries: [{
+            collection: "links_to",
+            document: "lt",
+            filters: [{ "path": "_to", "join": "rw._from" }],
+            subqueries: [{
+              collection: "resources",
+              document: "source",
+              filters: [{ path: "_id", join: "lt._from" }],
+              inline: true
+            }],
+            inline: true
+          }],
+          return: [{ path: "url", document: "source" }]
+        }
+      }, {
+        name: "outlinks",
+        query: {
+          collection: "links_to",
+          document: "lt",
+          filters: [{ path: "_from", join: "resource._id" }],
+          subqueries: [{
+            collection: "unique_urls",
+            document: "target",
+            filters: [{ path: "_id", join: "lt._to" }],
+            inline: true
+          }],
+          return: [{ path: "url", document: "target" }]
+        }
+      }]
+    },
+  }
+}
