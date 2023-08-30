@@ -1,10 +1,7 @@
 extends:
   - ./reports/queries.json5
   - ./reports/default.json5
-  - ./reports/screaming_frog.json5
-
 offloadBodyHtml: 'db'   # Internal storage flag, pls ignore thx
-
 spider:
   seed:
    - https://iu.edu
@@ -13,7 +10,6 @@ spider:
   saveXhrList: true 
   urls:
     crawl: "http*://{*.,}iu.edu/{*,*/**}"
-
 analysis:
   # SF actually EXCLUDES portions of the page by default rather than
   # using a positive selector. We can simulate that using our regions
@@ -26,9 +22,7 @@ analysis:
     selector:
       - main
       - body
-
   properties:
-
     # Screaming Frog's default report shows the first two H1 and H2 tags;
     # we'll pull them out for reporting purposes.
     content.h1:
@@ -39,7 +33,6 @@ analysis:
       source: body
       selector: "h2"
       limit: 2
-
     content.cms:
       - "tech.CMS.[0]"
       - "tech.Blogs.[0]"

@@ -1,27 +1,34 @@
 {
   reports: {
-    screaming_frog: {
-      name: "Internal_HTML",
-      description: "Screaming Frog's Internal HTML Report",
+    alternate: {
+      name: "Alternate",
+      description: "Internal HTML Report",
+      alterData: {
+        'Overview': {
+          action: 'split',
+          property: 'Subdomain'
+        }
+      },
       queries: {
-        pages: {
+        "Overview": {
           parent: "crawled_with_links",
           filters: [{ path: 'mime', eq: 'text/html' }],
           return: [
             { name: "Address", path: "url" },
+            { name: "Subdomain", path: "parsed.subdomain" },
             { name: "Content", path: "headers.`content-type`" }, 
             { name: "Status_Code", path: "code" }, 
             { name: "Status", path: "message" },
         
             { name: "Title_1_Length", path: "data.title" },
             { name: "Title_Length", path: "data.title", function: "length" },
-
             { name: "Meta_Keywords", path: "data.meta.keywords", function: "concat" },
             { name: "Meta_Keywords_Length", path: "data.meta.keywords", function: "length" },
-
             { name: "Meta_Description", path: "data.meta.description" },
             { name: "Meta_Description_Length", path: "data.meta.description", function: "length" },
-
+            { name: "Directory", path: "parsed.path[0]" },
+            { name: "Subdirectory", path: "parsed.path[1]" },
+            { name: "Sub-Subdirectory", path: "parsed.path[2]" },
             { name: "H1-1", path: "content.h1[0]" },
             { name: "H1-1_length", path: "content.h1[0]", function: "length" },
             { name: "H1-2", path: "content.h1[1]" },
@@ -30,7 +37,6 @@
             { name: "H2-1_length", path: "content.h2[0]", function: "length" },
             { name: "H2-2", path: "content.h2[1]" },
             { name: "H2-2_length", path: "content.h2[1]", function: "length" },
-
             { name: "Size_bytes", path: "size" },
             { name: "Text_Size_bytes", path: "content.text", function: "length" },
             { name: "Word_Count", path: "content.readability.words" },
